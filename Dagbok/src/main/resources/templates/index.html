@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dagboktest</title>
+</head>
+
+<body>
+
+    <ul>
+        <li th:each=" post : ${posts}">
+            <span th:text="${post.title}"></span>
+        </li>
+    </ul>
+
+
+
+
+
+
+</body>
+
+</html>

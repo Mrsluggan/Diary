@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -43,6 +44,25 @@ public class DiaryController {
 
     }
 
+    @GetMapping("/change")
+    public String change(@RequestParam int id) {
+        System.out.println(id);
+        return "redirect:/" + id;
+
+    }
+
+    @PostMapping("/edit")
+    public String edit(@RequestParam Integer id, @RequestParam String newTitle, @RequestParam String newText) {
+        System.out.println("Id: " + id);
+        System.out.println("New Title: " + newTitle);
+        System.out.println("New Text: " + newText);
+
+        diaryRepository.updateWithId(newTitle, newText, id);
+        // Add logic to update the diary entry with the new title using the id
+
+        return "redirect:/" + id;
+    }
+
     @PostMapping("/date")
     public String getDate(@RequestParam("date") LocalDate date, Model model) {
         String formattedDate = date.format(dtf);
@@ -51,6 +71,12 @@ public class DiaryController {
         System.out.println(diaryRepository.findWithDates(formattedDate));
         return "index";
     }
-    
+
+    @GetMapping("/{id}")
+    public String changeDiary(@PathVariable Integer id, Model model) {
+
+        model.addAttribute("postById", diaryRepository.findWithId(id));
+        return "form";
+    }
 
 }

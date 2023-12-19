@@ -8,12 +8,20 @@
             grid-area: menu;
         }
 
+
         .item2 {
+
             grid-area: main;
         }
 
         .grid-container {
+            margin:0;
+            overflow: auto;
             display: grid;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             grid-template-areas:
                 'menu main main main main main'
                 'menu main main main main main'
@@ -21,6 +29,11 @@
             gap: 10px;
             background-color: #2196F3;
             padding: 10px;
+            overflow: auto;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
         .grid-container>div {
@@ -43,8 +56,7 @@
             <h4>Gör ett inlägg</h4>
             <form method="post" th:action="@{/new-item}">
                 <input type="text" th:name="title" placeholder="Title"><br>
-                <input type="text" th:name="text" style="height: 80px; text-align: left;"
-                    placeholder="Skriv texten här"><br>
+                <input type="text" th:name="text" style="height: 80px; text-align: left;" placeholder="Skriv texten här"><br>
                 <button>Skicka</button>
             </form>
 
@@ -55,22 +67,25 @@
 
 
         <div class="item2">
-            Sortera inlägg
-            <form method="post" th:action="@{/date}">
-                <input type="date" th:name="date">
-                <button type="submit">Välj Datum</button>
-            </form>
-
+            <div style="margin-left: 50px;">
+                Sortera inlägg
+                <form method="post" th:action="@{/date}">
+                    <input type="date" th:name="date">
+                    <button type="submit">Välj Datum</button>
+                </form>
+            </div>
             <div>
                 <ul>
                     <ul th:each=" post : ${posts}" style="margin: 40px;">
                         <span th:text="${post.title}"></span><br>
                         <span th:text="${post.date}"></span><br>
-                        <span th:text="${post.text}"></span>
-                        <br><a th:href="@{/delete(id=${post.id})}"><button>Ta bort</button></a>
-                        
+                        <span th:text="${post.text}"></span><br>
+                        <a th:href="@{/delete(id=${post.id})}"><button>Ta bort</button></a>
+
+                        <a th:href="@{/change(id=${post.id})}"><button>ändra</button></a>
+
+
                     </ul>
-                    <br>
                 </ul>
 
 
@@ -79,6 +94,18 @@
         </div>
 
     </div>
+
+    <script>
+
+
+
+
+
+
+
+
+
+    </script>
 </body>
 
 </html>

@@ -14,8 +14,8 @@ public class Diary {
 
     private String title;
     private String text;
-    private String date;
 
+    private String date;
 
     public int getId() {
         return id;

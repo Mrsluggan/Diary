@@ -2,24 +2,83 @@
 <html lang="en" xmlns="http://www.thymleaf.org">
 
 <head>
+    <style>
+        .item1 {
+            text-align: center;
+            grid-area: menu;
+        }
+
+        .item2 {
+            grid-area: main;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-areas:
+                'menu main main main main main'
+                'menu main main main main main'
+                'menu main main main main main';
+            gap: 10px;
+            background-color: #2196F3;
+            padding: 10px;
+        }
+
+        .grid-container>div {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px 0;
+            font-size: 30px;
+
+        }
+    </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dagboktest</title>
 </head>
 
 <body>
+    <div class="grid-container">
 
-    <ul>
-        <li th:each=" post : ${posts}">
-            <span th:text="${post.title}"></span>
-        </li>
-    </ul>
+        <div class="item1">
+            <h2>Dagbok</h2>
+            <h4>Gör ett inlägg</h4>
+            <form method="post" th:action="@{/new-item}">
+                <input type="text" th:name="title" placeholder="Title"><br>
+                <input type="text" th:name="text" style="height: 80px; text-align: left;"
+                    placeholder="Skriv texten här"><br>
+                <button>Skicka</button>
+            </form>
+
+
+        </div>
 
 
 
 
+        <div class="item2">
+            Sortera inlägg
+            <form method="post" th:action="@{/date}">
+                <input type="date" th:name="date">
+                <button type="submit">Välj Datum</button>
+            </form>
+
+            <div>
+                <ul>
+                    <ul th:each=" post : ${posts}" style="margin: 40px;">
+                        <span th:text="${post.title}"></span><br>
+                        <span th:text="${post.date}"></span><br>
+                        <span th:text="${post.text}"></span>
+                        <br><a th:href="@{/delete(id=${post.id})}"><button>Ta bort</button></a>
+                        
+                    </ul>
+                    <br>
+                </ul>
 
 
+            </div>
+
+        </div>
+
+    </div>
 </body>
 
 </html>

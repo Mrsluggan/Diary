@@ -8,56 +8,48 @@
             grid-area: menu;
         }
 
-
         .item2 {
-
             grid-area: main;
         }
 
         .grid-container {
-            margin: 0;
-            overflow: auto;
             display: grid;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            grid-template-rows: auto;
             grid-template-areas:
-                'menu main main main main main'
-                'menu main main main main main'
-                'menu main main main main main';
+                'menu menu menu main main main'
+            ;
             gap: 10px;
             background-color: #2196F3;
             padding: 10px;
-            overflow: auto;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
         }
 
         .grid-container>div {
             background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px 0;
-            font-size: 30px;
-
+            padding: 20px;
+            font-size: 18px;
         }
 
         .post {
-
-            margin: 40px;
+            margin: 2%;
             background-color: white;
-            width: 50%;
             border-radius: 5px;
-            border-color: black;
-            border-style: solid;
-            box-shadow: 0px 0px 10px black;
+            border: 1px solid black;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        @media only screen and (max-width: 600px) {
+            .grid-container {
+                grid-template-areas:
+                    'menu'
+                    'main';
+            }
         }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dagboktest</title>
 </head>
+<link rel="icon" href="data:,">
 
 <body>
     <div class="grid-container">
@@ -79,18 +71,24 @@
 
 
         <div class="item2">
-            <div style="margin-left: 50px;">
+            <div>
                 <h4>Sortera inlägg</h4>
-                <form method="post" th:action="@{/date}" id="dateForm">
-                    Välj specifikt datum
-                    <input type="date" th:name="date" onchange="submitForm()">
-                </form>
-                Sortera mellan datum
-                <form method="post" th:action="@{/betweenDate}">
-                    <input type="date" th:name="firstDate">
-                    <input type="date" th:name="endDate">
+                <div>
+
+                    <form method="post" th:action="@{/betweenDate}">
+                        Sortera mellan datum eller specifikt
+                        <input type="date" th:name="firstDate">
+                        <input type="date" th:name="endDate">
+                        <button type="submit">Sök</button>
+                    </form>
+                </div>
+                <form method="post" th:action="@{/search}">
+                    <br>
+                    <input type="text" th:name="search" width="10%" placeholder="Sök efter inlägg" minlength="3"
+                        required>
                     <button type="submit">Sök</button>
                 </form>
+                <a href="/"><button>Återställ filter</button></a>
 
             </div>
             <div>
@@ -106,6 +104,11 @@
 
 
                     </ul>
+                    <div th:if="${#lists.isEmpty(posts)}" style="text-align: center;">Hoppsan, Verkar inte finnas något med din specifika sökning..... Du får väl försöka igen
+                        <div> <img src="https://i.imgflip.com/8a2whl.jpg">
+                        </div>
+                    </div>
+
                 </ul>
 
 

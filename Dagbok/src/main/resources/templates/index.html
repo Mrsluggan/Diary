@@ -80,11 +80,17 @@
 
         <div class="item2">
             <div style="margin-left: 50px;">
-                Sortera inlägg
+                <h4>Sortera inlägg</h4>
                 <form method="post" th:action="@{/date}" id="dateForm">
+                    Välj specifikt datum
                     <input type="date" th:name="date" onchange="submitForm()">
                 </form>
-
+                Sortera mellan datum
+                <form method="post" th:action="@{/betweenDate}">
+                    <input type="date" th:name="firstDate">
+                    <input type="date" th:name="endDate">
+                    <button type="submit">Sök</button>
+                </form>
 
             </div>
             <div>

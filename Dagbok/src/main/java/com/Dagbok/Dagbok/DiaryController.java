@@ -21,7 +21,7 @@ public class DiaryController {
 
     @GetMapping
     public String getIndex(Model model) {
-        model.addAttribute("posts", diaryRepository.findAll());
+        model.addAttribute("posts", diaryRepository.sortByDates());
         return "index";
     }
 
@@ -74,6 +74,16 @@ public class DiaryController {
 
         model.addAttribute("postById", diaryRepository.findWithId(id));
         return "form";
+    }
+
+    @PostMapping("betweenDate")
+    public String getBetweenDates(@RequestParam("firstDate") LocalDate firstDate, @RequestParam("endDate") LocalDate endDate, Model model) {
+
+        System.out.println(firstDate.format(dtf) + endDate.format(dtf));
+        
+        model.addAttribute("posts", diaryRepository.findBetweenDates(firstDate.format(dtf), endDate.format(dtf)));
+
+        return "index";
     }
 
 }

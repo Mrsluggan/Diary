@@ -15,7 +15,7 @@
         }
 
         .grid-container {
-            margin:0;
+            margin: 0;
             overflow: auto;
             display: grid;
             top: 0;
@@ -42,6 +42,17 @@
             font-size: 30px;
 
         }
+
+        .post {
+
+            margin: 40px;
+            background-color: white;
+            width: 50%;
+            border-radius: 5px;
+            border-color: black;
+            border-style: solid;
+            box-shadow: 0px 0px 10px black;
+        }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,8 +66,9 @@
             <h2>Dagbok</h2>
             <h4>Gör ett inlägg</h4>
             <form method="post" th:action="@{/new-item}">
-                <input type="text" th:name="title" placeholder="Title"><br>
-                <input type="text" th:name="text" style="height: 80px; text-align: left;" placeholder="Skriv texten här"><br>
+                <input type="text" th:name="title" placeholder="Title" required><br>
+                <input type="text" th:name="text" style="height: 80px; text-align: left;" placeholder="Skriv texten här"
+                    maxlength="800" required><br>
                 <button>Skicka</button>
             </form>
 
@@ -69,14 +81,16 @@
         <div class="item2">
             <div style="margin-left: 50px;">
                 Sortera inlägg
-                <form method="post" th:action="@{/date}">
-                    <input type="date" th:name="date">
-                    <button type="submit">Välj Datum</button>
+                <form method="post" th:action="@{/date}" id="dateForm">
+                    <input type="date" th:name="date" onchange="submitForm()">
                 </form>
+
+
             </div>
             <div>
+
                 <ul>
-                    <ul th:each=" post : ${posts}" style="margin: 40px;">
+                    <ul th:each=" post : ${posts}" class="post">
                         <span th:text="${post.title}"></span><br>
                         <span th:text="${post.date}"></span><br>
                         <span th:text="${post.text}"></span><br>
@@ -95,16 +109,14 @@
 
     </div>
 
+
+
+    <footer></footer>¨
+
     <script>
-
-
-
-
-
-
-
-
-
+        function submitForm() {
+            document.getElementById("dateForm").submit();
+        }
     </script>
 </body>
 

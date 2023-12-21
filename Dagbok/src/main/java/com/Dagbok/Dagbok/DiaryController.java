@@ -56,10 +56,7 @@ public class DiaryController {
         System.out.println("Id: " + id);
         System.out.println("New Title: " + newTitle);
         System.out.println("New Text: " + newText);
-
         diaryRepository.updateWithId(newTitle, newText, id);
-        // Add logic to update the diary entry with the new title using the id
-
         return "redirect:/" + id;
     }
 

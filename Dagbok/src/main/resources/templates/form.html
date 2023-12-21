@@ -3,23 +3,42 @@
 
 <head>
     <style>
+        .item1 {
+            text-align: center;
+            grid-area: menu;
+        }
+
+
         .item2 {
+
             grid-area: main;
         }
 
         .grid-container {
+            margin: 0;
+            overflow: auto;
             display: grid;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             grid-template-areas:
-                'main main main main main main'
-                'main main main main main main'
-                'main main main main main main';
+                'menu main main main main main'
+                'menu main main main main main'
+                'menu main main main main main';
             gap: 10px;
             background-color: #2196F3;
             padding: 10px;
+            overflow: auto;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
         }
 
         .grid-container>div {
             background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px 0;
             font-size: 30px;
 
         }
@@ -31,22 +50,34 @@
 
 <body>
     <div class="grid-container">
+        <div class="item1">
+            <h2>Dagbok</h2>
+            <h4>Gör ett inlägg</h4>
+            <form method="post" th:action="@{/new-item}">
+                <input type="text" th:name="title" placeholder="Title" required><br>
+                <input type="text" th:name="text" style="height: 80px; text-align: left;" placeholder="Skriv texten här"
+                    required><br>
+                <button>Skicka</button>
+            </form>
 
+
+        </div>
         <div class="item2-">
             <div>
                 <a href="/"><button>Gå tillbaka</button></a>
 
                 <ul>
 
-                    <ul th:each=" post : ${postById}" style="margin: 40px;">
+                    <ul th:each=" post : ${postById}"
+                        style="margin: 40px; background-color: white; width: 50%; border-radius: 5px; border-color: black; border-style: solid;  box-shadow: 0px 0px 10px black;">
                         <span th:text="${post.title}"></span><br>
                         <span th:text="${post.date}"></span><br>
                         <span th:text="${post.text}"></span><br>
 
                         <form method="post" th:action="@{/edit}">
-                            <input type="hidden" th:name="id" th:value="${id}"/>
-                            <input type="text" th:name="newTitle">
-                            <input type="text" th:name="newText">
+                            <input type="hidden" th:name="id" th:value="${id}" />
+                            <input type="text" th:name="newTitle" placeholder="New Title"><br>
+                            <input type="text" th:name="newText" placeholder="New text" style="height: 100px;"><br>
 
 
                             <button type="submit">Ändra inlägg</button>

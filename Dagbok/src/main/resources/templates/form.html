@@ -45,26 +45,26 @@
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dagboktest</title>
+    <title>Edit Diary </title>
 </head>
 
 <body>
     <div class="grid-container">
         <div class="item1">
-            <h2>Dagbok</h2>
-            <h4>Gör ett inlägg</h4>
+            <h2>Diary</h2>
+            <h4>Make a post</h4>
             <form method="post" th:action="@{/new-item}">
                 <input type="text" th:name="title" placeholder="Title" required><br>
                 <input type="text" th:name="text" style="height: 80px; text-align: left;" placeholder="Skriv texten här"
                     required><br>
-                <button>Skicka</button>
+                <button type="submit">Save</button>
             </form>
 
 
         </div>
         <div class="item2-">
             <div>
-                <a href="/"><button>Gå tillbaka</button></a>
+                <a href="/"><button>Go back</button></a>
 
                 <ul>
 
@@ -80,8 +80,10 @@
                             <input type="text" th:name="newText" placeholder="New text" style="height: 100px;"><br>
 
 
-                            <button type="submit">Ändra inlägg</button>
+                            <button type="submit">Edit post</button>
                         </form>
+                        <a th:href="@{/delete(id=${post.id})}" ><button>Remove</button></a>
+
                     </ul>
                 </ul>
 

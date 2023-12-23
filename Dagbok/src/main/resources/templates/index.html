@@ -47,7 +47,7 @@
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dagboktest</title>
+    <title>Diary</title>
 </head>
 <link rel="icon" href="data:,">
 
@@ -55,13 +55,13 @@
     <div class="grid-container">
 
         <div class="item1">
-            <h2>Dagbok</h2>
-            <h4>Gör ett inlägg</h4>
+            <h2>Diary</h2>
+            <h4>Make a post</h4>
             <form method="post" th:action="@{/new-item}">
                 <input type="text" th:name="title" placeholder="Title" required><br>
                 <input type="text" th:name="text" style="height: 80px; text-align: left;" placeholder="Skriv texten här"
                     maxlength="800" required><br>
-                <button>Skicka</button>
+                <button type="submit">Save</button>
             </form>
 
 
@@ -72,23 +72,24 @@
 
         <div class="item2">
             <div>
-                <h4>Sortera inlägg</h4>
+                <h4>Sort</h4>
                 <div>
 
                     <form method="post" th:action="@{/betweenDate}">
-                        Sortera mellan datum eller specifikt
+
+                        Sort between date or one specific
                         <input type="date" th:name="firstDate">
                         <input type="date" th:name="endDate">
-                        <button type="submit">Sök</button>
+                        <button type="submit">Search</button>
                     </form>
                 </div>
                 <form method="post" th:action="@{/search}">
                     <br>
                     <input type="text" th:name="search" width="10%" placeholder="Sök efter inlägg" minlength="3"
                         required>
-                    <button type="submit">Sök</button>
+                    <button type="submit">Search</button>
                 </form>
-                <a href="/"><button>Återställ filter</button></a>
+                <a href="/"><button>Reset filter</button></a>
 
             </div>
             <div>
@@ -98,13 +99,13 @@
                         <span th:text="${post.title}"></span><br>
                         <span th:text="${post.date}"></span><br>
                         <span th:text="${post.text}"></span><br>
-                        <a th:href="@{/delete(id=${post.id})}"><button>Ta bort</button></a>
 
-                        <a th:href="@{/change(id=${post.id})}"><button>ändra</button></a>
+                        <a th:href="@{/change(id=${post.id})}"><button>Edit</button></a>
 
 
                     </ul>
-                    <div th:if="${#lists.isEmpty(posts)}" style="text-align: center;">Hoppsan, Verkar inte finnas något med din specifika sökning..... Du får väl försöka igen
+                    <div th:if="${#lists.isEmpty(posts)}" style="text-align: center;">Oopsie-daisy! Looks like there's nada
+                        with your super-specific search..... Give it another go, pal!
                         <div> <img src="https://i.imgflip.com/8a2whl.jpg">
                         </div>
                     </div>

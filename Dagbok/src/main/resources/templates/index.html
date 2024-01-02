@@ -59,8 +59,8 @@
             <h4>Make a post</h4>
             <form method="post" th:action="@{/new-item}">
                 <input type="text" th:name="title" placeholder="Title" required><br>
-                <input type="text" th:name="text" style="height: 80px; text-align: left;" placeholder="Skriv texten här"
-                    maxlength="800" required><br>
+                <input type="text" th:name="text" style="height: 80px; text-align: left;" placeholder="Skriv texten här" maxlength="800" required><br>
+                <input type="date" th:name="time" required>
                 <button type="submit">Save</button>
             </form>
 

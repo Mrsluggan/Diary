@@ -31,11 +31,11 @@ public class DiaryController {
     // Lyssnar efter två parametrar, och sedan skapar ett nytt inlägg, därefter
     // skickar dem till databasen
     @PostMapping("/new-item")
-    public String addNew(@RequestParam("title") String title, @RequestParam("text") String text) {
+    public String addNew(@RequestParam("title") String title, @RequestParam("text") String text, @RequestParam("time") LocalDate time) {
         Diary diary = new Diary();
         diary.setTitle(title);
         diary.setText(text);
-        diary.setDate(localDate.format(dtf));
+        diary.setDate(time.format(dtf));
         diaryRepository.save(diary);
 
         return "redirect:/";
